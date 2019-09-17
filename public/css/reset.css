@@ -1,33 +1,65 @@
-/**
- * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
- * http://cssreset.com
- */
 html,
 body,
+header,
+section,
+nav,
+footer,
+article,
+aside,
+canvas,
+details,
+embed,
 div,
 span,
-applet,
-object,
-iframe,
+p,
+a,
+ul,
+ol,
+li,
+center,
+dl,
+dt,
+dd,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tr,
+th,
+td,
+tbody,
+thead,
+tfoot,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-p,
-blockquote,
+i,
+b,
+em,
+strong,
+br,
+hr,
+select,
+input,
+textarea,
+code,
 pre,
-a,
+cite,
 abbr,
 acronym,
 address,
 big,
-cite,
-code,
+applet,
+object,
+iframe,
+blockquote,
 del,
 dfn,
-em,
 img,
 ins,
 kbd,
@@ -36,62 +68,38 @@ s,
 samp,
 small,
 strike,
-strong,
 sub,
 sup,
 tt,
 var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
 figure,
 figcaption,
-footer,
-header,
-menu,
-nav,
 output,
 ruby,
-section,
 summary,
 time,
 mark,
 audio,
-video,
-input {
-  margin: 0;
+video {
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  font-weight: normal;
-  vertical-align: baseline;
+  margin: 0;
 }
-
-/* HTML5 display-role reset for older browsers */
+a {
+  text-decoration: none;
+  color: #333;
+}
+ul,
+ol {
+  list-style: none;
+}
+input {
+  outline: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+img,
 article,
 aside,
 details,
@@ -104,76 +112,63 @@ nav,
 section {
   display: block;
 }
-
-body {
-  line-height: 1;
-  height: 100%;
-  overflow: hidden;
+.unSelectedAble {
+  /* 内容不可以被选中 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
 blockquote,
 q {
   quotes: none;
 }
-
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
   content: none;
 }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* custom */
-a {
-  color: #7e8c8d;
-  text-decoration: none;
-  -webkit-backface-visibility: hidden;
-}
-
-li {
-  list-style: none;
-}
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-
 ::-webkit-scrollbar-track-piece {
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 6px;
 }
-
 ::-webkit-scrollbar-thumb:vertical {
   height: 5px;
   background-color: rgba(125, 125, 125, 0.7);
   -webkit-border-radius: 6px;
 }
-
 ::-webkit-scrollbar-thumb:horizontal {
   width: 5px;
   background-color: rgba(125, 125, 125, 0.7);
   -webkit-border-radius: 6px;
 }
-
 html,
 body {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
-
 body {
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   -webkit-text-size-adjust: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }

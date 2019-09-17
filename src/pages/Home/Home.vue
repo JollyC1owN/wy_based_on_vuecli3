@@ -232,7 +232,7 @@ export default {
       console.log(666)
     },
     goTo() {
-      this.$router.replace('/search')
+      this.$router.push('/search')
     }
   },
   components: {}
