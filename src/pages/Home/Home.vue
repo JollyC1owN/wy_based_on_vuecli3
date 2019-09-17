@@ -432,4 +432,14 @@ export default {
           color #7F7F7F
           font-size 24px
           padding-left 10px
+
+        .photos
+          display inline-block
+          width 323px
+
+          img
+            width 150px
+            height 150px
+            float left
+            margin-right 5px
 </style>

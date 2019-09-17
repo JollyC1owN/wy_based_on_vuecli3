@@ -41,7 +41,7 @@ export default {}
 
 .cart-container
   position relative
-  height 100%
+  height 1334px
   background-color #f4f4f4
 
   .cart-header
@@ -60,7 +60,7 @@ export default {}
       width 90px
       height 88px
       font-size 30px
-      color $red
+      color #B4282D
       line-height 90px
       text-align center
 
@@ -114,7 +114,8 @@ export default {}
         margin 0 135px
         text-align center
         line-height 92px
-        background-color red
+        background-color #B4282D
+        border-radius 5px
 
         a
           font-size 30px

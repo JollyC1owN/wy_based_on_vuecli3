@@ -95,6 +95,8 @@ export default {
         padding-left 2px
         background-color #F4F4F4
         font-size 28px
+        outline none
+        border-width 0
 
       .close
         display inline-block
