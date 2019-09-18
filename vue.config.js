@@ -23,6 +23,19 @@ module.exports = {
       maskIcon: 'favicon.ico',
       msTileImage: 'favicon.ico'
     }
+  },
+  // 配置代理
+  devServer: {
+    proxy: {
+      // 请求地址以/api开头
+      '/api': {
+        target: 'http://m.you.163.com',
+        changeOrigin: true, //是否支持跨域
+        pathRewrite: {
+          '^/api': '', // rewrite path
+        },
+      },
+    }
   }
 
 }

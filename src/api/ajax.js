@@ -14,5 +14,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
 	return response.data
 }, error => {
+	console.log(error);
 	return new Promise(() => { })
 })
+export default axios

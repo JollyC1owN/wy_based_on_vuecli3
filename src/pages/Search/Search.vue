@@ -6,7 +6,7 @@
         <input
           type="text"
           name="search"
-          placeholder="输入要搜索的内容"
+          :placeholder="defaultKeyword"
           v-model="searchText"
           class="searchInput"
         />
@@ -14,35 +14,29 @@
       </div>
       <div class="cancel" @click="$router.back()">取消</div>
     </div>
-    <div class="searchRecommend">
+    <div class="searchRecommend" v-show="!searchText.length>0">
       <div class="recommendTitle">热门推荐</div>
       <div class="recommendList">
         <ul>
-          <li>
-            <a href="javascript:;">电动牙刷69元起</a>
-          </li>
-          <li>
-            <a href="javascript:;">牛仔裤</a>
-          </li>
-          <li>
-            <a href="javascript:;">鞋子</a>
-          </li>
-          <li>
-            <a href="javascript:;">流苏小裙子</a>
-          </li>
-          <li>
-            <a href="javascript:;">除醛除味</a>
-          </li>
-          <li>
-            <a href="javascript:;">苹果11</a>
+          <li
+            v-for="(hotKeyword, index) in hotKeywordList"
+            :key="index"
+            :class="{heigthlight:hotKeyword.highlight===1}"
+          >
+            <a :href="hotKeyword.schemeUrl">{{hotKeyword.keyword}}</a>
           </li>
         </ul>
       </div>
     </div>
+
+    <ul class="searchResultList" v-show="searchText.length>0">
+      <li v-for="(item, index) in seachResult" :key="index">{{item}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Search',
   data() {
@@ -50,9 +44,22 @@ export default {
       searchText: ''
     }
   },
+  mounted() {
+    this.$store.dispatch('getKeyword')
+  },
+  computed: {
+    ...mapState(['hotKeywordList', 'defaultKeyword', 'seachResult'])
+  },
   methods: {
     cancelSearch() {
       this.searchText = ''
+    }
+  },
+  watch: {
+    searchText() {
+      if (this.searchText.length > 0) {
+        this.$store.dispatch('searchByKeyword', this.searchText)
+      }
     }
   },
   components: {}
@@ -134,7 +141,6 @@ export default {
           height 47px
           line-height 47px
           box-sizing border-box
-          color #333333
           font-size 24px
           margin 0 32px 32px 0
           padding 0 15px
@@ -142,6 +148,30 @@ export default {
           float left
           border-radius 10px
 
-          .a
-            color #333
+        .heigthlight
+          color #b4282d
+          border 1px solid #b4282d
+
+          a
+            color #b4282d
+
+  .searchResultList
+    width 100%
+    background-color #fff
+    padding-left 30px
+
+    li
+      position relative
+      height 90px
+      line-height 90px
+
+    li::after
+      content ''
+      position absolute
+      background-color #d9d9d9
+      left 0
+      width 100%
+      height 1px
+      transform-origin 50% 100% 0
+      bottom 0
 </style>
