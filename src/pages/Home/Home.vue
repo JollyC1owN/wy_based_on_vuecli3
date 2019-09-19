@@ -229,7 +229,6 @@ export default {
         scrollY: true,
         probeType: 3
       })
-      console.log(666)
     },
     goTo() {
       this.$router.push('/search')

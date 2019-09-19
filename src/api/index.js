@@ -8,3 +8,6 @@ export const reqSearchByKeyword = (keywordPrefix) => ajax.get(`${prefix}/xhr/sea
 		keywordPrefix
 	}
 })
+
+
+export const reqGetCategoryL1List = () => ajax('/sort')

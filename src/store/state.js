@@ -1,5 +1,6 @@
 export default {
   seachResult: [],
   hotKeywordList: [],
-  defaultKeyword: ''
+  defaultKeyword: '',
+  categoryL1List: []
 }
