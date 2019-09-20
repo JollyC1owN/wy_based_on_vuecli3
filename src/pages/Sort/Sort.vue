@@ -32,6 +32,7 @@ export default {
   },
   computed: {
     ...mapState(['categoryL1List'])
+    
   },
   components: {}
 }
