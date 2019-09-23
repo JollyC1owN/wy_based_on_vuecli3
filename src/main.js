@@ -1,21 +1,28 @@
+/**
+ * 入口文件
+ */
+import Vue from 'vue';
+import 'lib-flexible/flexible';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import './mock/mock-server';
 
-import Vue from 'vue'
-import App from './App.vue'
-import { Tabbar, TabbarItem, Swipe, SwipeItem, Row, Col, Search } from 'vant'
-import './mock/mock.server'
-import router from './router/index'
-import store from './store/index'
-Vue.config.productionTip = false
-Vue.use(Tabbar)
-  .use(TabbarItem)
-  .use(Swipe)
-  .use(SwipeItem)
-  .use(Row)
-  .use(Col)
-  .use(Search)
+import Footer from './components/Footer/Footer.vue';
+import Header from './components/Header/Header.vue';
+import Split from './components/Split/Split.vue';
+import HeaderSlot from './components/HeaderSlot/HeaderSlot.vue';
+// 注册全局组件
+Vue.component('Footer', Footer);
+Vue.component('Header', Header);
+Vue.component('Split', Split);
+Vue.component('HeaderSlot', HeaderSlot);
 
+/* eslint-disable no-new */
 new Vue({
+  el: '#app',
   render: h => h(App),
   router,
-  store
-}).$mount('#app')
+  store,
+  template: '<App />'
+});

@@ -1,107 +1,97 @@
 <template>
-  <div class="searchWrap">
-    <div class="searchHeader">
-      <div class="inputWrap">
-        <i class="magnifier"></i>
+  <section class="search-container">
+    <div class="search-title">
+      <div class="search-input">
+        <i class="iconfont icon-search"></i>
         <input
           type="text"
-          name="search"
-          :placeholder="defaultKeyword"
+          class="placeholder"
+          :placeholder="initSearchData.defaultKeyword.keyword"
           v-model="searchText"
-          class="searchInput"
         />
-        <i class="close" v-if="searchText.length>0" @click="cancelSearch"></i>
+        <i class="close" v-if="searchText.length>0" @click="cancelSearch">×</i>
       </div>
-      <div class="cancel" @click="$router.back()">取消</div>
+      <button @click="$router.back()">取消</button>
     </div>
-    <div class="searchRecommend" v-show="!searchText.length>0">
-      <div class="recommendTitle">热门推荐</div>
-      <div class="recommendList">
-        <ul>
-          <li
-            v-for="(hotKeyword, index) in hotKeywordList"
-            :key="index"
-            :class="{heigthlight:hotKeyword.highlight===1}"
-          >
-            <a :href="hotKeyword.schemeUrl">{{hotKeyword.keyword}}</a>
-          </li>
-        </ul>
-      </div>
+    <div class="search-list" v-if="!this.searchText.trim().length>0">
+      <p>热门搜索</p>
+      <ul>
+        <li
+          :class="{highlight: keywords.highlight === 1}"
+          v-for="(keywords, index) in initSearchData.hotKeywordVOList"
+          :key="index"
+        >
+          <a href="javascript:void(0);">{{keywords.keyword}}</a>
+        </li>
+      </ul>
     </div>
-
-    <ul class="searchResultList" v-show="searchText.length>0">
-      <li v-for="(item, index) in seachResult" :key="index">{{item}}</li>
+    <ul class="searchResultList" v-else>
+      <li v-for="(item, index) in searchResult" :key="index">{{item}}</li>
     </ul>
-  </div>
+  </section>
 </template>
-
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'Search',
   data() {
     return {
       searchText: ''
     }
-  },
-  mounted() {
-    this.$store.dispatch('getKeyword')
-  },
-  computed: {
-    ...mapState(['hotKeywordList', 'defaultKeyword', 'seachResult'])
   },
   methods: {
     cancelSearch() {
       this.searchText = ''
     }
   },
+  mounted() {
+    this.$store.dispatch('getInitSearch')
+  },
+  computed: {
+    ...mapState({
+      initSearchData: state => state.search.initSearchData,
+      searchResult: state => state.search.searchResult
+    })
+  },
   watch: {
     searchText() {
-      if (this.searchText.length > 0) {
-        this.$store.dispatch('searchByKeyword', this.searchText)
+      if (this.searchText.trim().length > 0) {
+        let text = this.searchText.trim()
+        this.$store.dispatch('getSearchResult', text)
       }
     }
-  },
-  components: {}
+  }
 }
 </script>
-
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.searchWrap
-  height 1334px
-  background-color #eee
+@import '../../common/stylus/mixins.styl'
 
-  .searchHeader
-    height 88px
-    padding 0 30px
+.search-container
+  .search-title
     display flex
+    justify-content space-around
     align-items center
-    background-color #fff
+    width 100%
+    height 88px
+    font-size 30px
+    padding 30px
+    box-sizing border-box
 
-    .inputWrap
-      display flex
-      align-items center
-      width 604px
+    .search-input
+      flex 7
       height 56px
-      padding 0 20px
-      box-sizing border-box
+      border-radius 10px
+      border none
       background-color #F4F4F4
-      border-radius 5px
+      text-align center
+      line-height 56px
 
-      .magnifier
-        display inline-block
-        width 28px
-        height 28px
-        background-image url('../Home/images/search.png')
-        background-size cover
-        margin-right 16px
+      i
+        font-size 30px
 
-      .searchInput
-        width 520px
-        height 39px
-        padding-left 2px
+      .placeholder
+        font-size 30px
+        color #666
         background-color #F4F4F4
-        font-size 28px
         outline none
         border-width 0
 
@@ -109,51 +99,45 @@ export default {
         display inline-block
         width 50px
         height 50px
-        background-image url('./images/close.png')
-        background-size cover
+        line-height 56px
 
-    .cancel
-      width 56px
-      height 42px
-      line-height 42px
-      text-align center
-      color #333333
-      margin-left 30px
-      font-size 28px
+    button
+      flex 1
+      height 40px
+      margin-left 10px
+      font-size 30px
+      border none
+      outline none
+      background-color #fff
 
-  .searchRecommend
-    width 100%
-    height 436px
-    box-sizing border-box
-    margin-bottom 20px
+  .search-list
+    clearFix()
     padding 0 30px 30px
-    background-color #fff
 
-    .recommendTitle
+    p
+      width 690px
       height 90px
-      line-height 90px
-      color #999
       font-size 28px
+      color #999
+      line-height 90px
 
-    .recommendList
-      ul
-        >li
-          height 47px
-          line-height 47px
-          box-sizing border-box
-          font-size 24px
-          margin 0 32px 32px 0
-          padding 0 15px
-          border 1px solid #000
-          float left
-          border-radius 10px
+    li
+      float left
+      height 48px
+      line-height 48px
+      border 1px solid #999
+      margin 0 32px 32px 0
 
-        .heigthlight
-          color #b4282d
-          border 1px solid #b4282d
+      a
+        font-size 24px
+        color #333
+        padding 0 15px
 
-          a
-            color #b4282d
+      &.highlight
+        border 1px solid $red
+
+        a
+          color $red
 
   .searchResultList
     width 100%
