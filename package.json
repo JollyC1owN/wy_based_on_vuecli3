@@ -16,7 +16,7 @@
     "lib-flexible": "^0.3.2",
     "mint-ui": "^2.2.13",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "swiper": "^4.5.0",
